@@ -4,16 +4,16 @@ Prp is an interactive command-line study guide designed to help prepare for the 
 ## Script Installation
 
 ### Unix-based Systems (macOS, Linux)
-1. Download install-unix.sh from the releases page.
+1. Download [install-unix.sh](https://github.com/ib729/Prp/releases/download/v1.0.0/install-unix.sh) from the releases page.
 
 2. Make the script executable and run it.
-``` chmod +x install-unix.sh
-./install-unix.sh ```
+```chmod +x install-unix.sh```
+``` ./install-unix.sh ```
 
 ### Windows
-1. Download install-win.bat from the releases page.
+1. Download [install-win.bat](https://github.com/ib729/Prp/releases/download/v1.0.0/install-win.bat) from the releases page.
 
-2.Double-click install-win.bat to run the script.
+2. Double-click install-win.bat to run the script.
 
 ## Manual Installation
 

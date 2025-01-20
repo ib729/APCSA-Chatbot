@@ -1,120 +1,203 @@
-import java.util.Scanner;
-
 public class Search {
     public String processQuery(String query) {
-        // Convert query to lowercase for case-insensitive matching
         query = query.toLowerCase();
+        String result = "";
 
-        // Variables and Data Types
-        if (query.contains("int") || query.contains("double") || query.contains("variable")) {
-            return "\nVariables and Data Types:\n" +
-                    "- int: Whole numbers (-2147483648 to 2147483647)\n" +
-                    "- double: Decimal numbers\n" +
-                    "- boolean: true/false values\n" +
-                    "- char: Single characters\n" +
-                    "Example:\n" +
-                    "   int age = 15;\n" +
-                    "   double gpa = 3.8;\n";
+        // Variables and Types
+        if (hasWord(query, "variable", "type", "int", "double", "boolean")) {
+            result += "\nVARIABLES AND TYPES\n";
+            result += "Variables are like containers that store information in your program.\n\n";
+            result += "Main types of variables:\n";
+            result += "1. int - whole numbers (like 5, -3, 42)\n";
+            result += "   Example: int age = 15;\n\n";
+            result += "2. double - decimal numbers (like 3.14, -2.5)\n";
+            result += "   Example: double price = 19.99;\n\n";
+            result += "3. boolean - true/false values\n";
+            result += "   Example: boolean isHappy = true;\n\n";
+            result += "4. char - single characters (like 'A', '7', '!')\n";
+            result += "   Example: char grade = 'A';\n\n";
+            result += "5. String - text (like \"Hello\")\n";
+            result += "   Example: String name = \"John\";\n\n";
+            result += "Remember: \n";
+            result += "- Variables must be declared with a type\n";
+            result += "- Names can't start with numbers\n";
+            result += "- Use meaningful names for your variables\n";
+        }
+
+        // Print Statements
+        if (hasWord(query, "print", "output", "display")) {
+            result += "\nPRINT STATEMENTS\n";
+            result += "Print statements show text or values on the screen.\n\n";
+            result += "Ways to print:\n";
+            result += "1. Print with newline (most common):\n";
+            result += "   System.out.println(\"Hello!\");\n\n";
+            result += "2. Print without newline:\n";
+            result += "   System.out.print(\"Hello \");\n\n";
+            result += "You can print:\n";
+            result += "- Text: System.out.println(\"Hi there\");\n";
+            result += "- Variables: System.out.println(score);\n";
+            result += "- Math: System.out.println(2 + 2);\n";
+            result += "- Multiple things: System.out.println(\"Score: \" + score);\n";
+        }
+
+        // If Statements
+        if (hasWord(query, "if", "else", "condition")) {
+            result += "\nIF STATEMENTS\n";
+            result += "If statements let your program make decisions.\n\n";
+            result += "Basic if statement:\n";
+            result += "if (score >= 90) {\n";
+            result += "    System.out.println(\"Great job!\");\n";
+            result += "}\n\n";
+            result += "If-else statement:\n";
+            result += "if (age >= 16) {\n";
+            result += "    System.out.println(\"Can drive\");\n";
+            result += "} else {\n";
+            result += "    System.out.println(\"Too young\");\n";
+            result += "}\n\n";
+            result += "Comparison operators:\n";
+            result += "==  equal to\n";
+            result += "!=  not equal to\n";
+            result += ">   greater than\n";
+            result += "<   less than\n";
+            result += ">=  greater than or equal to\n";
+            result += "<=  less than or equal to\n";
         }
 
         // Loops
-        if (query.contains("loop") || query.contains("for") || query.contains("while")) {
-            return "\nLoops in Java:\n" +
-                    "1. For Loop:\n" +
-                    "   for (int i = 0; i < 5; i++) {\n" +
-                    "       System.out.println(i);\n" +
-                    "   }\n\n" +
-                    "2. While Loop:\n" +
-                    "   int count = 0;\n" +
-                    "   while (count < 5) {\n" +
-                    "       System.out.println(count);\n" +
-                    "       count++;\n" +
-                    "   }\n";
-        }
-
-        // If statements and conditionals
-        if (query.contains("if") || query.contains("else") || query.contains("condition")) {
-            return "\nConditional Statements:\n" +
-                    "if (condition) {\n" +
-                    "    // code\n" +
-                    "} else if (another condition) {\n" +
-                    "    // code\n" +
-                    "} else {\n" +
-                    "    // code\n" +
-                    "}\n\n" +
-                    "Comparison Operators:\n" +
-                    "==  equal to\n" +
-                    "!=  not equal to\n" +
-                    ">   greater than\n" +
-                    "<   less than\n" +
-                    ">=  greater than or equal to\n" +
-                    "<=  less than or equal to\n";
-        }
-
-        // String methods
-        if (query.contains("string") || query.contains("text") || query.contains("substring")) {
-            return "\nString Methods:\n" +
-                    "- length(): get string length\n" +
-                    "- substring(start, end): get part of string\n" +
-                    "- equals(): compare strings\n" +
-                    "- indexOf(): find position of character\n" +
-                    "Example:\n" +
-                    "   String text = \"Hello World\";\n" +
-                    "   int length = text.length();  // 11\n" +
-                    "   String part = text.substring(0, 5);  // \"Hello\"\n";
-        }
-
-        // Math operations
-        if (query.contains("math") || query.contains("calculation") || query.contains("operator")) {
-            return "\nMath Operations:\n" +
-                    "+ addition\n" +
-                    "- subtraction\n" +
-                    "* multiplication\n" +
-                    "/ division\n" +
-                    "% modulus (remainder)\n\n" +
-                    "Math Class Methods:\n" +
-                    "Math.pow(base, exponent) - power\n" +
-                    "Math.sqrt(number) - square root\n" +
-                    "Math.abs(number) - absolute value\n" +
-                    "Math.random() - random number between 0 and 1\n";
+        if (hasWord(query, "loop", "while", "for")) {
+            result += "\nLOOPS\n";
+            result += "Loops let you repeat code multiple times.\n\n";
+            result += "1. While Loop:\n";
+            result += "- Repeats while a condition is true\n";
+            result += "Example (counts from 1 to 5):\n";
+            result += "int count = 1;\n";
+            result += "while (count <= 5) {\n";
+            result += "    System.out.println(count);\n";
+            result += "    count = count + 1;\n";
+            result += "}\n\n";
+            result += "2. For Loop:\n";
+            result += "- Used when you know how many times to repeat\n";
+            result += "Example (also counts from 1 to 5):\n";
+            result += "for (int i = 1; i <= 5; i++) {\n";
+            result += "    System.out.println(i);\n";
+            result += "}\n";
         }
 
         // Arrays
-        if (query.contains("array") || query.contains("list")) {
-            return "\nArrays:\n" +
-                    "Declaration and Creation:\n" +
-                    "   int[] numbers = new int[5];\n" +
-                    "   int[] scores = {90, 85, 95, 88, 92};\n\n" +
-                    "Accessing Elements:\n" +
-                    "   int firstNumber = numbers[0];\n" +
-                    "   numbers[1] = 42;\n\n" +
-                    "Common Operations:\n" +
-                    "- array.length to get size\n" +
-                    "- Loop through array using for loop\n";
+        if (hasWord(query, "array", "arrays")) {
+            result += "\nARRAYS\n";
+            result += "Arrays store multiple values in a single variable.\n\n";
+            result += "Creating arrays:\n";
+            result += "1. Empty array:\n";
+            result += "   int[] numbers = new int[5];  // Makes room for 5 numbers\n\n";
+            result += "2. Array with values:\n";
+            result += "   int[] scores = {95, 88, 92, 85};\n\n";
+            result += "Using arrays:\n";
+            result += "- Get a value: scores[0]  // First value\n";
+            result += "- Change a value: scores[1] = 90;  // Change second value\n";
+            result += "- Array length: scores.length\n\n";
+            result += "Remember:\n";
+            result += "- Arrays start at position 0\n";
+            result += "- Can't change array size after creating it\n";
         }
 
-        // Scanner and input
-        if (query.contains("input") || query.contains("scanner") || query.contains("read")) {
-            return "\nScanner and Input:\n" +
-                    "Scanner input = new Scanner(System.in);\n\n" +
-                    "Methods:\n" +
-                    "nextInt() - read integer\n" +
-                    "nextDouble() - read decimal\n" +
-                    "nextLine() - read string\n" +
-                    "next() - read word\n\n" +
-                    "Example:\n" +
-                    "   String name = input.nextLine();\n" +
-                    "   int age = input.nextInt();\n";
+        // Methods
+        if (hasWord(query, "method", "function")) {
+            result += "\nMETHODS\n";
+            result += "Methods are reusable blocks of code that perform specific tasks.\n\n";
+            result += "Basic method:\n";
+            result += "public static void sayHello() {\n";
+            result += "    System.out.println(\"Hello!\");\n";
+            result += "}\n\n";
+            result += "Method with parameters:\n";
+            result += "public static void greet(String name) {\n";
+            result += "    System.out.println(\"Hello, \" + name);\n";
+            result += "}\n\n";
+            result += "Method that returns a value:\n";
+            result += "public static int add(int a, int b) {\n";
+            result += "    return a + b;\n";
+            result += "}\n";
         }
 
-        // Default response if no keywords match
-        return "No matching content found. Try using keywords like:\n" +
-                "- variable, int, double\n" +
-                "- loop, for, while\n" +
-                "- if, condition\n" +
-                "- string, text\n" +
-                "- math, calculation\n" +
-                "- array, list\n" +
-                "- input, scanner\n";
+        // Classes
+        if (hasWord(query, "class", "object")) {
+            result += "\nCLASSES\n";
+            result += "Classes are like blueprints for creating objects.\n\n";
+            result += "Simple class example:\n";
+            result += "public class Student {\n";
+            result += "    // Variables for student info\n";
+            result += "    String name;\n";
+            result += "    int grade;\n\n";
+            result += "    // Constructor to create new student\n";
+            result += "    public Student(String n, int g) {\n";
+            result += "        name = n;\n";
+            result += "        grade = g;\n";
+            result += "    }\n\n";
+            result += "    // Method to print student info\n";
+            result += "    public void printInfo() {\n";
+            result += "        System.out.println(name + \": \" + grade);\n";
+            result += "    }\n";
+            result += "}\n";
+        }
+
+        // Strings
+        if (hasWord(query, "string", "text")) {
+            result += "\nSTRINGS\n";
+            result += "Strings store text (words, sentences, etc).\n\n";
+            result += "Creating Strings:\n";
+            result += "String name = \"Alice\";\n\n";
+            result += "Useful String methods:\n";
+            result += "1. length() - counts characters\n";
+            result += "   name.length()  // 5\n\n";
+            result += "2. toUpperCase() - makes all letters capital\n";
+            result += "   name.toUpperCase()  // \"ALICE\"\n\n";
+            result += "3. toLowerCase() - makes all letters lowercase\n";
+            result += "   name.toLowerCase()  // \"alice\"\n\n";
+            result += "4. equals() - compare two strings\n";
+            result += "   name.equals(\"Bob\")  // false\n";
+        }
+
+        // Math
+        if (hasWord(query, "math", "calculation", "operator")) {
+            result += "\nMATH OPERATIONS\n";
+            result += "Basic math operators:\n";
+            result += "+ addition: 5 + 3 = 8\n";
+            result += "- subtraction: 5 - 3 = 2\n";
+            result += "* multiplication: 5 * 3 = 15\n";
+            result += "/ division: 5 / 2 = 2 (with ints)\n";
+            result += "            5.0 / 2 = 2.5 (with doubles)\n\n";
+            result += "Math shortcuts:\n";
+            result += "count = count + 1;  // Same as: count++;\n";
+            result += "x = x + 5;  // Same as: x += 5;\n\n";
+            result += "Math class methods:\n";
+            result += "Math.max(5, 3)  // Returns larger number (5)\n";
+            result += "Math.min(5, 3)  // Returns smaller number (3)\n";
+            result += "Math.abs(-5)    // Returns positive value (5)\n";
+        }
+
+        if (result.equals("")) {
+            result = "\nTry searching for:\n";
+            result += "- variables or types\n";
+            result += "- print or output\n";
+            result += "- if statements\n";
+            result += "- loops\n";
+            result += "- arrays\n";
+            result += "- methods\n";
+            result += "- classes\n";
+            result += "- strings\n";
+            result += "- math\n\n";
+            result += "Or type 'topics' to see everything!\n";
+        }
+
+        return result;
+    }
+
+    private boolean hasWord(String text, String... words) {
+        for (String word : words) {
+            if (text.contains(word)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
